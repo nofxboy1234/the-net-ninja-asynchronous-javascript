@@ -10,6 +10,33 @@ function testAsync() {
   console.log('4');
 }
 
+function testPromises() {
+  const getSomething = () => {
+    return new Promise((resolve, reject) => {
+      // fetch something
+      resolve('some data');
+      // reject('some error');
+    });
+  };
+
+  // getSomething().then(
+  //   (data) => {
+  //     console.log(data);
+  //   },
+  //   (err) => {
+  //     console.log(err);
+  //   }
+  // );
+
+  getSomething()
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 const getTodos = (resource, callback) => {
   const request = new XMLHttpRequest();
 
@@ -26,19 +53,3 @@ const getTodos = (resource, callback) => {
   request.open('GET', resource);
   request.send();
 };
-
-console.log(1);
-console.log(2);
-
-getTodos('todos/luigi.json', (err, data) => {
-  console.log(data);
-  getTodos('todos/mario.json', (err, data) => {
-    console.log(data);
-    getTodos('todos/shaun.json', (err, data) => {
-      console.log(data);
-    });
-  });
-});
-
-console.log(3);
-console.log(4);
