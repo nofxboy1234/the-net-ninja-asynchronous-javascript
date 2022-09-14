@@ -56,6 +56,20 @@ function testChainPromises() {
     });
 }
 
+function testFetchAPI() {
+  fetch('todos/luigi.json')
+    .then((response) => {
+      console.log('resolved', response);
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log('rejected', err);
+    });
+}
+
 const getTodos = (resource) => {
   return new Promise((resolve, reject) => {
     const request = new XMLHttpRequest();
@@ -73,15 +87,3 @@ const getTodos = (resource) => {
     request.send();
   });
 };
-
-fetch('todos/luigi.json')
-  .then((response) => {
-    console.log('resolved', response);
-    return response.json();
-  })
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((err) => {
-    console.log('rejected', err);
-  });
