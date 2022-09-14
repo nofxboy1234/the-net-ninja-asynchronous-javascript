@@ -70,20 +70,39 @@ function testFetchAPI() {
     });
 }
 
-const getTodos = (resource) => {
-  return new Promise((resolve, reject) => {
-    const request = new XMLHttpRequest();
+// Old getTodos
+// const getTodos = (resource) => {
+//   return new Promise((resolve, reject) => {
+//     const request = new XMLHttpRequest();
 
-    request.addEventListener('readystatechange', () => {
-      if (request.readyState === 4 && request.status === 200) {
-        const data = JSON.parse(request.responseText);
-        resolve(data);
-      } else if (request.readyState === 4) {
-        reject('error getting resource');
-      }
-    });
+//     request.addEventListener('readystatechange', () => {
+//       if (request.readyState === 4 && request.status === 200) {
+//         const data = JSON.parse(request.responseText);
+//         resolve(data);
+//       } else if (request.readyState === 4) {
+//         reject('error getting resource');
+//       }
+//     });
 
-    request.open('GET', resource);
-    request.send();
-  });
+//     request.open('GET', resource);
+//     request.send();
+//   });
+// };
+
+// New getTodos
+const getTodos = async () => {
+  const response = await fetch('todos/luigi.json');
+  const data = await response.json();
+
+  return data;
 };
+
+console.log(1);
+console.log(2);
+
+getTodos().then((data) => {
+  console.log('resolved:', data);
+});
+
+console.log(3);
+console.log(4);
